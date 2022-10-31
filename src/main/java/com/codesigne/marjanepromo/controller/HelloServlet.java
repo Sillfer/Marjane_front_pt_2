@@ -2,6 +2,8 @@ package com.codesigne.marjanepromo.controller;
 
 import java.io.*;
 
+import com.codesigne.marjanepromo.DAO.AdminCenterDao;
+import com.codesigne.marjanepromo.model.AdminCenter;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
@@ -15,11 +17,16 @@ public class HelloServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
+        AdminCenterDao ad = new AdminCenterDao();
+        AdminCenter a = new AdminCenter();
+        a=ad.getAdminById(2L);
+
+
 
         // Hello
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
+        out.println("<h1>" + a.getLastname()+ "</h1>");
         out.println("</body></html>");
     }
 
