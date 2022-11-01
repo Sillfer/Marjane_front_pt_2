@@ -8,7 +8,7 @@
 
 
 <div>
-    <a href="/hello-servlet">Clique here</a>
+    <a href="hello-servlet">Clique here</a>
 </div>
 
 
