@@ -3,4 +3,37 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
+    <display-name>Java EE 8 Sample Application</display-name>
+    <servlet>
+        <servlet-name>GeneralServlet</servlet-name>
+        <servlet-class>com.codesigne.marjanepromo.controller.GeneralServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GeneralServlet</servlet-name>
+        <url-pattern>*.general</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>com.codesigne.marjanepromo.controller.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>*.center</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ManagerServlet</servlet-name>
+        <servlet-class>com.codesigne.marjanepromo.controller.ManagerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManagerServlet</servlet-name>
+        <url-pattern>*.manager</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PromotionServlet</servlet-name>
+        <servlet-class>com.codesigne.marjanepromo.controller.PromotionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PromotionServlet</servlet-name>
+        <url-pattern>*.promotion</url-pattern>
+    </servlet-mapping>
 </web-app>
