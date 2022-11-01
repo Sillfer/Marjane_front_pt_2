@@ -19,7 +19,7 @@ public class HelloServlet extends HttpServlet {
         response.setContentType("text/html");
         AdminCenterDao ad = new AdminCenterDao();
         AdminCenter a = new AdminCenter();
-        a=ad.getAdminById(2L);
+        a=ad.getAdminById(1L);
 
 
 
