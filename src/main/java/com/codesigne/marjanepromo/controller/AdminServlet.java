@@ -1,15 +1,19 @@
 package com.codesigne.marjanepromo.controller;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
 public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    String path = request.getServletPath();
+    if (path.equals("/login.center")){
+        request.getRequestDispatcher("views/AdminCenter/CenterLogin.jsp").forward(request,response);
+    }
     }
 
     @Override
