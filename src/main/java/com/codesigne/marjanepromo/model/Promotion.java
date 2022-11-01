@@ -10,14 +10,20 @@ import java.util.Date;
 
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Promotion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String status ;
+    private String status;
+
+    private Date dateStart;
+
+    private Date dateEnd;
 
     private Date date;
 
@@ -35,7 +41,8 @@ public class Promotion implements Serializable {
         return "Promotion{" +
                 "id=" + id +
                 ", status=" + status +
-                ", date=" + date +
+                ", dateStart=" + dateStart +
+                ", dateEnd=" + dateEnd +
                 ", adminCenter=" + adminCenter +
                 ", subCategory=" + subCategory +
                 '}';
