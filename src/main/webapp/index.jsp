@@ -5,10 +5,11 @@
 <jsp:include page="views/inc/headers/headerAdminGeneral.jsp">
     <jsp:param name="navbar" value="navbar"/>
 </jsp:include>
+<title>Admin Dashboard</title>
 
 <!-- component -->
 <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black">
-    <div class="hero h-1/2" style="background-image: url(https://placeimg.com/1000/800/arch);">
+    <div class="hero h-1/2" style="background-image: url(https://i0.wp.com/leseco.ma/wp-content/uploads/2021/11/Marjane-Holding.jpg?fit=1200%2C600&ssl=1);">
         <div class="hero-overlay bg-opacity-60"></div>
         <div class="hero-content text-center text-neutral-content">
             <div class="max-w-md">
@@ -20,7 +21,7 @@
     <div class="h-full">
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-            <div class="bg-blue-500 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 font-medium group">
+            <div class="bg-blue-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                     <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                          class="stroke-current text-blue-800  transform transition-transform duration-500 ease-in-out">
@@ -29,11 +30,11 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl">1,257</p>
+                    <p class="text-2xl text-white">1,257</p>
                     <p>Visitors</p>
                 </div>
             </div>
-            <div class="bg-blue-500  shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 font-medium group">
+            <div class="bg-blue-800  shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                     <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                          class="stroke-current text-blue-800 transform transition-transform duration-500 ease-in-out">
@@ -42,11 +43,11 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl">557</p>
+                    <p class="text-2xl text-white">557</p>
                     <p>Orders</p>
                 </div>
             </div>
-            <div class="bg-blue-500 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 font-medium group">
+            <div class="bg-blue-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                     <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                          class="stroke-current text-blue-800 transform transition-transform duration-500 ease-in-out">
@@ -55,11 +56,11 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl">$11,257</p>
+                    <p class="text-2xl text-white">$11,257</p>
                     <p>Sales</p>
                 </div>
             </div>
-            <div class="bg-blue-500 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 font-medium group">
+            <div class="bg-blue-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                     <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                          class="stroke-current text-blue-800 transform transition-transform duration-500 ease-in-out">
@@ -68,7 +69,7 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl">$75,257</p>
+                    <p class="text-2xl text-white">$75,257</p>
                     <p>Balances</p>
                 </div>
             </div>
