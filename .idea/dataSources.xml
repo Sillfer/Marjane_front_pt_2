@@ -8,5 +8,16 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/marjane</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="promotion/Hibernate" uuid="a48d3dfc-3e9b-45ac-a8ca-a378a8ea3c5b">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/gliou/OneDrive/Bureau/HibernateJPA/Front/src/main/resources/META-INF/persistence.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/marjane</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

@@ -1,14 +1,14 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="MarjanePromo:war">
+  <artifact type="war" name="Front:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <properties id="maven-jee-properties">
       <options>
-        <module>MarjanePromo</module>
+        <module>Front</module>
         <packaging>war</packaging>
       </options>
     </properties>
     <root id="archive" name="MarjanePromo-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="MarjanePromo:war exploded" />
+      <element id="artifact" artifact-name="Front:war exploded" />
     </root>
   </artifact>
 </component>
