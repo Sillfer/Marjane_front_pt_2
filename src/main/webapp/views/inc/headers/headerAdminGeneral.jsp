@@ -19,9 +19,9 @@
                 </svg>
             </label>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a href="">Dashboard</a></li>
-                <li><a href="">Promotions</a></li>
-                <li><a href="">Admins</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Promotions</a></li>
+                <li><a href="#">Admins</a></li>
             </ul>
         </div>
         <a class="btn btn-ghost normal-case text-xl">Marjane</a>
@@ -34,6 +34,6 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <a class="btn">Logout</a>
+        <a href="logout.general" class="btn">Logout</a>
     </div>
 </div>

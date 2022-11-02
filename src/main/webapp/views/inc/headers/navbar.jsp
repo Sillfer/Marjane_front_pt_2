@@ -19,18 +19,18 @@
                 </svg>
             </label>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a href="login.general">General</a></li>
-                <li><a href="login.center">Center</a></li>
-                <li><a href="login.manager">Manager</a></li>
+                <li><a href="landing.general">General</a></li>
+                <li><a href="landing.center">Center</a></li>
+                <li><a href="landing.manager">Manager</a></li>
             </ul>
         </div>
         <a class="btn btn-ghost normal-case text-xl">Marjane</a>
     </div>
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal p-0">
-            <li><a href="login.general">General</a></li>
-            <li><a href="login.center">Center</a></li>
-            <li><a href="login.manager">Manager</a></li>
+            <li><a href="landing.general">General</a></li>
+            <li><a href="landing.center">Center</a></li>
+            <li><a href="landing.manager">Manager</a></li>
         </ul>
     </div>
     <div class="navbar-end">
