@@ -11,7 +11,7 @@ public class ManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String path = request.getServletPath();
-    if (path.equals("/login.manager")){
+    if (path.equals("/landing.manager")){
         request.getRequestDispatcher("views/MarketManager/ManagerLogin.jsp").forward(request,response);
     }
     }

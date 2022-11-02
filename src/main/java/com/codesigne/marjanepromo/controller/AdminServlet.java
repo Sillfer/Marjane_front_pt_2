@@ -11,7 +11,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String path = request.getServletPath();
-    if (path.equals("/login.center")){
+    if (path.equals("/landing.center")){
         request.getRequestDispatcher("views/AdminCenter/CenterLogin.jsp").forward(request,response);
     }
     }
