@@ -56,6 +56,8 @@ public class AdminGeneralDao extends AbstractHibernateDao<AdminGeneral>{
         return create(admin);
     }
 
+
+
     // update admin
     public AdminGeneral updateAdmin(AdminGeneral admin) {
         return update(admin);
@@ -72,18 +74,12 @@ public class AdminGeneralDao extends AbstractHibernateDao<AdminGeneral>{
     }
 
     public static void main(String[] args) {
-//        AdminGeneral a = new AdminGeneral();
-//        a.setFirstname("reda");
-//        a.setLastname("laghrissi");
-//        a.setEmail("test@test.com");
-//        a.setPassword("test");
-        AdminGeneralDao ad = new AdminGeneralDao();
-//        ad.createAdmin(a);
-        if(ad.validateAdminLogin("test@tet.com","test")!=null){
-            System.out.println("Connected==========>");
-        }else{
-            System.out.println("inccorect email or password !!!");
-        }
-//        System.out.println("success");
+//        AdminGeneralDao adminGeneralDao = new AdminGeneralDao();
+//        AdminGeneral adminGeneral = new AdminGeneral();
+//        adminGeneral.setEmail("gliouinemahdi@gmail.com");
+//        adminGeneral.setFirstname("Mahdi");
+//        adminGeneral.setLastname("Gliouine");
+//        adminGeneral.setPassword("123456");
+//        adminGeneralDao.createAdmin(adminGeneral);
     }
 }

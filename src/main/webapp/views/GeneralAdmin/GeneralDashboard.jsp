@@ -221,6 +221,6 @@
 </div>
 
 
-<jsp:include page="views/inc/footer.jsp">
+<jsp:include page="../inc/footer.jsp">
     <jsp:param name="footer" value="footer"/>
 </jsp:include>
