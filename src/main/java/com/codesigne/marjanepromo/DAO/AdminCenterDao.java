@@ -21,6 +21,14 @@ public class AdminCenterDao extends AbstractHibernateDao<AdminCenter>{
         return findAll();
     }
 
+    public List getPromotionByAdmin(long id) {
+        return jpaService.runInTransaction(entityManager -> {
+            return entityManager.createQuery("select p from Promotion p where p.adminCenter.id = :id",AdminCenter.class)
+                    .setParameter("id", id)
+                    .getResultList();
+        });
+    }
+
     public AdminCenter getAdminById(long id){
         return findOne(id);
     }

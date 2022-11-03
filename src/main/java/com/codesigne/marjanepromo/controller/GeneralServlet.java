@@ -1,37 +1,37 @@
 package com.codesigne.marjanepromo.controller;
 
+import com.codesigne.marjanepromo.DAO.AdminCenterDao;
 import com.codesigne.marjanepromo.DAO.AdminGeneralDao;
+import com.codesigne.marjanepromo.model.AdminCenter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GeneralServlet extends HttpServlet {
 
     private AdminGeneralDao adminGeneralDao;
+    private AdminCenterDao adminCenterDao;
 
     public void init() throws ServletException {
         adminGeneralDao = new AdminGeneralDao();
+        adminCenterDao = new AdminCenterDao();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
         if (path.equals("/landing.general")) {
-            Cookie[] cookies = request.getCookies();
-            String log = "0";
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("log")) {
-                    log = cookie.getValue();
-                }
-            }
-            request.setAttribute("log", log);
             request.getRequestDispatcher("views/GeneralAdmin/GeneralLogin.jsp").forward(request, response);
-        }else if(path.equals("/Dashboard.general")){
-//            check if there is cookie named id
+//            if the cookie is not set don't redirect to the dashboard
+        } else if (path.equals("/Dashboard.general")) {
+            List admins = adminCenterDao.getAllAdmins();
+            request.setAttribute("admins", admins);
             Cookie[] cookies = request.getCookies();
             String id = "0";
             for (Cookie cookie : cookies) {
@@ -40,11 +40,13 @@ public class GeneralServlet extends HttpServlet {
                 }
             }
             if (id.equals("0")) {
+//                get all center admins and send them to the dashboard
                 response.sendRedirect("landing.general");
             } else {
                 request.getRequestDispatcher("views/GeneralAdmin/GeneralDashboard.jsp").forward(request, response);
             }
-        }else if(path.equals("/logout.general")){
+//            if there is no cookie named id redirect to landing.general page
+        } else if (path.equals("/logout.general")) {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("id")) {
@@ -56,6 +58,7 @@ public class GeneralServlet extends HttpServlet {
         }
     }
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
@@ -64,15 +67,43 @@ public class GeneralServlet extends HttpServlet {
             String password = request.getParameter("password");
             if (adminGeneralDao.validateAdminLogin(email, password) != null) {
                 Cookie cookie = new Cookie("id", String.valueOf(adminGeneralDao.validateAdminLogin(email, password).getId()));  //create cookie
-                cookie.setMaxAge(24 * 60 * 60);  //set cookie age to 1 year
+                cookie.setMaxAge(24 * 60 * 60);
                 response.addCookie(cookie);  //add cookie to response
                 request.setAttribute("id", adminGeneralDao.validateAdminLogin(email, password).getId());
                 response.sendRedirect("Dashboard.general");
-            }else {
+            } else {
                 String errorMessage = "Invalid email or password";
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("views/GeneralAdmin/GeneralLogin.jsp").forward(request, response);
             }
+        } else if (path.equals("/createCentral.general")) {
+            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+//            get the parameter admin id from the cookie
+            Cookie[] cookies = request.getCookies();
+            String idgeneral = "0";
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    idgeneral = cookie.getValue();
+                }
+            }
+            AdminCenterDao adminCenterDao = new AdminCenterDao();
+            AdminCenter adminCenter = new AdminCenter();
+            adminCenter.setFirstname(firstname);
+            adminCenter.setLastname(lastname);
+            adminCenter.setEmail(email);
+            adminCenter.setPassword(password);
+            adminCenter.setAdminGeneral(adminGeneralDao.getAdminById(Long.parseLong(idgeneral)));
+            if (adminCenterDao.createAdmin(adminCenter)) {
+                response.sendRedirect("Dashboard.general");
+            } else {
+                String errorMessage = "Form is not valid";
+                request.setAttribute("errorMessage", errorMessage);
+                request.getRequestDispatcher("views/GeneralAdmin/GeneralDashboard.jsp").forward(request, response);
+            }
         }
+
     }
 }

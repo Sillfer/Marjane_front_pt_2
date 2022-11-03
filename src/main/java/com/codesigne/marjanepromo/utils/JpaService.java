@@ -34,7 +34,6 @@ public class JpaService {
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success=false;
         transaction.begin();
-
         try{
             T returnValue = function.apply(entityManager);
             success = true;
@@ -46,6 +45,5 @@ public class JpaService {
                 transaction.rollback();
             }
         }
-
     }
 }

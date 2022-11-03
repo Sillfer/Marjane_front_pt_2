@@ -1,6 +1,7 @@
 package com.codesigne.marjanepromo.DAO;
 
 import com.codesigne.marjanepromo.utils.JpaService;
+import jakarta.persistence.EntityTransaction;
 
 
 import java.io.Serializable;
@@ -30,11 +31,11 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
     }
 
     public boolean create(T entity) {
-        return jpaService.runInTransaction(entityManager -> {
-
+        jpaService.runInTransaction(entityManager -> {
             entityManager.persist(entity);
             return true;
         });
+        return true;
     }
 
     public T update(T entity) {
