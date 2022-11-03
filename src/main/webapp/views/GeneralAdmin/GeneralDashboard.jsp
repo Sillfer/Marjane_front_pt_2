@@ -65,6 +65,11 @@
                                            type="password" placeholder="******************">
                                 </div>
                             </div>
+                        <select name="center_id">
+                            <c:forEach items="${centers}" var="center">
+                                <option value="${center.id}">${center.nom}</option>
+                            </c:forEach>
+                        </select>
                             <button type="submit"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             >
@@ -148,10 +153,13 @@
                             <thead>
                             <tr>
                                 <th class="px-4 bg-gray-100  text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    NAME
+                                    FIRST NAME
                                 </th>
                                 <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    PROMOTIONS ADDED
+                                    LAST NAME
+                                </th>
+                                <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    EMAIL
                                 </th>
                                 <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"></th>
                             </tr>
@@ -160,27 +168,14 @@
                             <c:forEach items="${admins}" var="admin">
                                 <tr class="text-gray-700">
                                     <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                            ${admin.firstName}
-                                        Mahdi
+                                            ${admin.firstname}
                                     </th>
                                     <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            ${admin.lastName}
-                                        Gliouine
+                                            ${admin.lastname}
                                     </td>
                                     <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            ${admin.lastName}
+                                            ${admin.email}
                                     </td>
-                                        <%--                                <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">--%>
-                                        <%--                                    <div class="flex items-center">--%>
-                                        <%--                                        <span class="mr-2">70%</span>--%>
-                                        <%--                                        <div class="w-full">--%>
-                                        <%--                                            <div class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">--%>
-                                        <%--                                                <div style="width: 70%"--%>
-                                        <%--                                                     class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600"></div>--%>
-                                        <%--                                            </div>--%>
-                                        <%--                                        </div>--%>
-                                        <%--                                    </div>--%>
-                                        <%--                                </td>--%>
                                 </tr>
                             </c:forEach>
                             </tbody>

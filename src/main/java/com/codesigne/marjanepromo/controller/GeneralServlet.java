@@ -2,7 +2,10 @@ package com.codesigne.marjanepromo.controller;
 
 import com.codesigne.marjanepromo.DAO.AdminCenterDao;
 import com.codesigne.marjanepromo.DAO.AdminGeneralDao;
+import com.codesigne.marjanepromo.DAO.CenterDao;
 import com.codesigne.marjanepromo.model.AdminCenter;
+import com.codesigne.marjanepromo.model.AdminGeneral;
+import com.codesigne.marjanepromo.model.Center;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -17,10 +20,12 @@ public class GeneralServlet extends HttpServlet {
 
     private AdminGeneralDao adminGeneralDao;
     private AdminCenterDao adminCenterDao;
+    private CenterDao centerDao;
 
     public void init() throws ServletException {
         adminGeneralDao = new AdminGeneralDao();
         adminCenterDao = new AdminCenterDao();
+        centerDao = new CenterDao();
     }
 
     @Override
@@ -30,8 +35,10 @@ public class GeneralServlet extends HttpServlet {
             request.getRequestDispatcher("views/GeneralAdmin/GeneralLogin.jsp").forward(request, response);
 //            if the cookie is not set don't redirect to the dashboard
         } else if (path.equals("/Dashboard.general")) {
-            List admins = adminCenterDao.getAllAdmins();
+            List<AdminCenter> admins = adminCenterDao.getAllAdmins();
             request.setAttribute("admins", admins);
+            List<Center> centers = centerDao.getAllCenter();
+            request.setAttribute("centers", centers);
             Cookie[] cookies = request.getCookies();
             String id = "0";
             for (Cookie cookie : cookies) {
@@ -81,6 +88,7 @@ public class GeneralServlet extends HttpServlet {
             String lastname = request.getParameter("lastname");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            Long center_id = Long.valueOf(request.getParameter("center_id"));
 //            get the parameter admin id from the cookie
             Cookie[] cookies = request.getCookies();
             String idgeneral = "0";
@@ -95,6 +103,7 @@ public class GeneralServlet extends HttpServlet {
             adminCenter.setLastname(lastname);
             adminCenter.setEmail(email);
             adminCenter.setPassword(password);
+            adminCenter.setCenter(centerDao.getCenterById(center_id));
             adminCenter.setAdminGeneral(adminGeneralDao.getAdminById(Long.parseLong(idgeneral)));
             if (adminCenterDao.createAdmin(adminCenter)) {
                 response.sendRedirect("Dashboard.general");
