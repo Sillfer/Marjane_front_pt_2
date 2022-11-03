@@ -39,19 +39,11 @@
                             <input class="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-blue-400"
                                    type="password" name="password" placeholder="Enter your password">
                         </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <input id="remember_me" name="remember_me" type="checkbox"
-                                       class="h-4 w-4 bg-green-800 focus:ring-blue-400 border-gray-300 rounded">
-                                <label for="remember_me" class="ml-2 block text-sm text-gray-800">
-                                    Remember me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <% if(request.getAttribute("errorMessage")!=null){ %>
-                            <p class="text-red-600"><%= request.getAttribute("alert") %></p>
-                            <% } %>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text">Remember me</span>
+                                <input type="checkbox" class="toggle toggle-primary" checked/>
+                            </label>
                         </div>
                         <div>
                             <button type="submit"
@@ -66,6 +58,15 @@
             </div>
         </div>
     </div>
+    <% if (request.getAttribute("errorMessage") != null) { %>
+    <div class="toast">
+        <div class="alert alert-info">
+            <div>
+                <span><%= request.getAttribute("errorMessage") %></span>
+            </div>
+        </div>
+    </div>
+    <% } %>
 </div>
 </body>
 </html>
