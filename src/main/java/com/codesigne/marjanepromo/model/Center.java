@@ -24,6 +24,7 @@ public class Center implements Serializable {
     private AdminCenter adminCenter;
     //getters and setters
 
+
     //toString function
     @Override
     public String toString() {

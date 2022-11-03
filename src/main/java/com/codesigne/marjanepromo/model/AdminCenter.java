@@ -34,7 +34,7 @@ public class AdminCenter implements Serializable {
     @OneToMany(mappedBy = "adminCenter",fetch = FetchType.LAZY)
     private List<MarketManager> marketManager;
 
-    @OneToOne(mappedBy = "adminCenter")
+    @OneToOne
     private Center center;
 
 
