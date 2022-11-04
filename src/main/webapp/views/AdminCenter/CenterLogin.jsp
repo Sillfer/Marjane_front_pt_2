@@ -25,7 +25,7 @@
                     <h3 class="font-semibold text-2xl text-gray-800">Central Admin</h3>
                     <p class="text-gray-500">Please sign in to your account.</p>
                 </div>
-                <form action="loginGeneral.general" method="post">
+                <form action="loginCenter.center" method="post">
                     <div class="space-y-5">
                         <div class="space-y-2">
                             <label class="text-sm font-medium text-gray-700 tracking-wide">Email</label>

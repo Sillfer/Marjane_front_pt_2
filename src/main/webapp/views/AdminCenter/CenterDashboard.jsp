@@ -5,7 +5,7 @@
 <jsp:include page="../inc/headers/headerAdminGeneral.jsp">
     <jsp:param name="navbar" value="navbar"/>
 </jsp:include>
-<title>Center Admin Dashboard</title>
+<title>General Dashboard</title>
 
 <!-- component -->
 <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black">
@@ -16,19 +16,69 @@
             <div class="max-w-md">
                 <h1 class="mb-5 text-5xl font-bold">Welcome</h1>
                 <!-- The button to open modal -->
-                <label for="my-modal-4" class="btn btn-primary">Add Manager</label>
+                <label for="my-modal-4" class="btn btn-primary">Add a promotion</label>
                 <!-- Put this part before </body> tag -->
-                <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+                <input type="checkbox" id="my-modal-4" class="modal-toggle"/>
                 <label for="my-modal-4" class="modal cursor-pointer">
                     <label class="modal-box relative" for="my-modal-4">
-                        <h3 class="text-lg font-bold">Congratulations random Internet user!</h3>
-                        <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-<%--                        form--%>
-                        <form action="">
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label
-">Email address</label>
+                        <p>
+                        <form class="w-full max-w-lg" action="createPromotion.center" method="post">
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                        Start Date
+                                    </label>
+                                    <input name="datestart"
+                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                           type="date" placeholder="Jane">
+                                    <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+                                </div>
+                                <div class="w-full md:w-1/2 px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    >
+                                        End Date
+                                    </label>
+                                    <input name="dateend"
+                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                           type="date" placeholder="Doe">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                        Email
+                                    </label>
+                                    <input name="email"
+                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                           type="email" placeholder="***@gmail.com">
+                                </div>
+                            </div>
 
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                        Password
+                                    </label>
+                                    <input name="password"
+                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                           type="password" placeholder="******************">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3">
+                                    <select name="center_id" class="select select-bordered w-full max-w-xs">
+                                        <option disabled selected>Select a Category</option>
+<%--                                        <c:forEach items="${centers}" var="center">--%>
+<%--                                            <option value="${center.id}">${center.nom} - ${center.ville}</option>--%>
+<%--                                        </c:forEach>--%>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            >
+                                Add
+                            </button>
                         </form>
                     </label>
                 </label>
@@ -95,10 +145,10 @@
         <div class="grid col-start-2 col-span-4 p-4 gap-4">
 
             <!-- Social Traffic -->
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow-lg rounded">
+            <div class="flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow-lg rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
-                        <div class="relative w-full max-w-full flex-grow flex-1">
+                        <div class="w-full max-w-full flex-grow flex-1">
                             <h3 class="font-semibold text-base text-gray-900 ">Admins</h3>
                         </div>
                     </div>
@@ -107,48 +157,44 @@
                             <thead>
                             <tr>
                                 <th class="px-4 bg-gray-100  text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    NAME
+                                    FIRST NAME
                                 </th>
                                 <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    PROMOTIONS ADDED
+                                    LAST NAME
+                                </th>
+                                <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    EMAIL
                                 </th>
                                 <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="text-gray-700">
-                                <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                    Mahdi
-                                </th>
-                                <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    80
-                                </td>
-                                <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <div class="flex items-center">
-                                        <span class="mr-2">70%</span>
-                                        <div class="relative w-full">
-                                            <div class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
-                                                <div style="width: 70%"
-                                                     class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+<%--                            <c:forEach items="${admins}" var="admin">--%>
+                                <tr class="text-gray-700">
+                                    <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+<%--                                            ${admin.firstname}--%>
+                                    </th>
+                                    <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+<%--                                            ${admin.lastname}--%>
+                                    </td>
+                                    <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+<%--                                            ${admin.email}--%>
+                                    </td>
+                                </tr>
+<%--                            </c:forEach>--%>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <!-- ./Social Traffic -->
-
         </div>
         <!-- Client Table -->
         <div class="mt-4 mx-4">
 
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
                 <div class="flex flex-wrap items-center px-4 py-2">
-                    <div class="relative w-full max-w-full flex-grow flex-1">
+                    <div class="w-full max-w-full flex-grow flex-1">
                         <h3 class="font-semibold text-base text-gray-900 ">Promotions</h3>
                     </div>
                 </div>
