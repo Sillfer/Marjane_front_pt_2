@@ -25,7 +25,7 @@ public class Promotion implements Serializable {
 
     private Date dateEnd;
 
-    private Date date;
+    private Long points;
 
     @ManyToOne
     private AdminCenter adminCenter;
@@ -43,6 +43,7 @@ public class Promotion implements Serializable {
                 ", status=" + status +
                 ", dateStart=" + dateStart +
                 ", dateEnd=" + dateEnd +
+                ", points=" + points +
                 ", adminCenter=" + adminCenter +
                 ", subCategory=" + subCategory +
                 '}';

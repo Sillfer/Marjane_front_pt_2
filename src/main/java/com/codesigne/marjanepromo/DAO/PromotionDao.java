@@ -29,7 +29,6 @@ public class PromotionDao extends AbstractHibernateDao<Promotion>{
         }
     }
 
-
     //create promotion
 
     public boolean createPromotion(Promotion p){
