@@ -6,6 +6,7 @@
     <%--    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">--%>
     <link rel="stylesheet"
           href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
 <div class="navbar bg-base-100 drop-shadow">
