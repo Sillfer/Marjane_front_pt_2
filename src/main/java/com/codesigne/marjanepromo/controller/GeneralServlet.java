@@ -4,7 +4,6 @@ import com.codesigne.marjanepromo.DAO.AdminCenterDao;
 import com.codesigne.marjanepromo.DAO.AdminGeneralDao;
 import com.codesigne.marjanepromo.DAO.CenterDao;
 import com.codesigne.marjanepromo.model.AdminCenter;
-import com.codesigne.marjanepromo.model.AdminGeneral;
 import com.codesigne.marjanepromo.model.Center;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -74,7 +73,7 @@ public class GeneralServlet extends HttpServlet {
             String password = request.getParameter("password");
             if (adminGeneralDao.validateAdminLogin(email, password) != null) {
                 Cookie cookie = new Cookie("id", String.valueOf(adminGeneralDao.validateAdminLogin(email, password).getId()));  //create cookie
-                cookie.setMaxAge(24 * 60 * 60);
+                cookie.setMaxAge(60 * 60);  //set cookie age to 1 hour
                 response.addCookie(cookie);  //add cookie to response
                 request.setAttribute("id", adminGeneralDao.validateAdminLogin(email, password).getId());
                 response.sendRedirect("Dashboard.general");

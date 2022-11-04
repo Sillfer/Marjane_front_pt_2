@@ -65,11 +65,16 @@
                                            type="password" placeholder="******************">
                                 </div>
                             </div>
-                        <select name="center_id">
-                            <c:forEach items="${centers}" var="center">
-                                <option value="${center.id}">${center.nom}</option>
-                            </c:forEach>
-                        </select>
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full px-3">
+                                    <select name="center_id" class="select select-bordered w-full max-w-xs">
+                                        <option disabled selected>Select a Center</option>
+                                        <c:forEach items="${centers}" var="center">
+                                            <option value="${center.id}">${center.nom} - ${center.ville}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
                             <button type="submit"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             >
