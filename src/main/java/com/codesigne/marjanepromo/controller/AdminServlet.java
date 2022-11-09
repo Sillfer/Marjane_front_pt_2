@@ -2,23 +2,31 @@ package com.codesigne.marjanepromo.controller;
 
 import com.codesigne.marjanepromo.DAO.AdminCenterDao;
 import com.codesigne.marjanepromo.DAO.PromotionDao;
+import com.codesigne.marjanepromo.DAO.SubCategoryDao;
+import com.codesigne.marjanepromo.model.Promotion;
+import com.codesigne.marjanepromo.model.SubCategory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class AdminServlet extends HttpServlet {
 
     private AdminCenterDao adminCenterDao;
     private PromotionDao promotionDao;
+    private SubCategoryDao subCategoryDao;
 
     public void init() throws ServletException {
         adminCenterDao = new AdminCenterDao();
         promotionDao = new PromotionDao();
+        subCategoryDao = new SubCategoryDao();
     }
 
     @Override
@@ -27,6 +35,8 @@ public class AdminServlet extends HttpServlet {
         if (path.equals("/landing.center")) {
             request.getRequestDispatcher("views/AdminCenter/CenterLogin.jsp").forward(request, response);
         } else if (path.equals("/Dashboard.center")) {
+            List<SubCategory> subCategories = subCategoryDao.getAllCategories();
+            request.setAttribute("subCategories", subCategories);
             Cookie[] cookies = request.getCookies();
             String id_center = "0";
             for (Cookie cookie : cookies) {
@@ -59,7 +69,38 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("errorMessage", errorMessage);
                 response.sendRedirect("landing.center");
             }
-        }else if(path.equals("/createPromotion.center")){
+        } else if (path.equals("/createPromotion.center")) {
+            Date dateStart = new Date();
+            Date dateEnd = new Date();
+            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
+            try {
+                dateStart = dateFormat.parse(request.getParameter("dateStart"));
+                dateEnd = dateFormat.parse(request.getParameter("dateEnd"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Long points = Long.parseLong(request.getParameter("points"));
+            SubCategory subCategory = subCategoryDao.getCategoryById(Long.parseLong(request.getParameter("subCategory")));
+            Cookie[] cookies = request.getCookies();
+            String id_center = "0";
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id_center")) {
+                    id_center = cookie.getValue();
+                }
+            }
+            Promotion promotion = new Promotion();
+            promotion.setDateStart(dateStart);
+            promotion.setDateEnd(dateEnd);
+            promotion.setPoints(points);
+            promotion.setSubCategory(subCategory);
+            promotion.setAdminCenter(adminCenterDao.getAdminById(Long.parseLong(id_center)));
+            if (promotionDao.createPromotion(promotion)) {
+                response.sendRedirect("Dashboard.center");
+            } else {
+                String errorMessage = "Invalid Form";
+                request.setAttribute("errorMessage", errorMessage);
+                response.sendRedirect("Dashboard.center");
+            }
         }
     }
 }

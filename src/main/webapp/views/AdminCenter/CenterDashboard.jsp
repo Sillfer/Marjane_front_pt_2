@@ -28,7 +28,7 @@
                                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                         Start Date
                                     </label>
-                                    <input name="datestart"
+                                    <input name="dateStart"
                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                            type="date" placeholder="Jane">
                                     <p class="text-red-500 text-xs italic">Please fill out this field.</p>
@@ -38,39 +38,28 @@
                                     >
                                         End Date
                                     </label>
-                                    <input name="dateend"
+                                    <input name="dateEnd"
                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                            type="date" placeholder="Doe">
                                 </div>
-                            </div>
-                            <div class="flex flex-wrap -mx-3 mb-6">
-                                <div class="w-full px-3">
-                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                        Email
+                                <div class="w-full md:w-1/2 px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    >
+                                        Points
                                     </label>
-                                    <input name="email"
-                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                           type="email" placeholder="***@gmail.com">
+                                    <input name="points"
+                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                           type="number" placeholder="Points" min="1">
                                 </div>
                             </div>
 
                             <div class="flex flex-wrap -mx-3 mb-6">
                                 <div class="w-full px-3">
-                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                        Password
-                                    </label>
-                                    <input name="password"
-                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                           type="password" placeholder="******************">
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap -mx-3 mb-6">
-                                <div class="w-full px-3">
-                                    <select name="center_id" class="select select-bordered w-full max-w-xs">
+                                    <select name="subCategory" class="select select-bordered w-full max-w-xs">
                                         <option disabled selected>Select a Category</option>
-<%--                                        <c:forEach items="${centers}" var="center">--%>
-<%--                                            <option value="${center.id}">${center.nom} - ${center.ville}</option>--%>
-<%--                                        </c:forEach>--%>
+                                        <c:forEach items="${subCategories}" var="subCategories">
+                                            <option value="${subCategories.id}">${subCategories.name}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -169,19 +158,19 @@
                             </tr>
                             </thead>
                             <tbody>
-<%--                            <c:forEach items="${admins}" var="admin">--%>
-                                <tr class="text-gray-700">
-                                    <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-<%--                                            ${admin.firstname}--%>
-                                    </th>
-                                    <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-<%--                                            ${admin.lastname}--%>
-                                    </td>
-                                    <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-<%--                                            ${admin.email}--%>
-                                    </td>
-                                </tr>
-<%--                            </c:forEach>--%>
+                            <%--                            <c:forEach items="${admins}" var="admin">--%>
+                            <tr class="text-gray-700">
+                                <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                    <%--                                            ${admin.firstname}--%>
+                                </th>
+                                <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                    <%--                                            ${admin.lastname}--%>
+                                </td>
+                                <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                    <%--                                            ${admin.email}--%>
+                                </td>
+                            </tr>
+                            <%--                            </c:forEach>--%>
                             </tbody>
                         </table>
                     </div>
