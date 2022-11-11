@@ -3,8 +3,10 @@ package com.codesigne.marjanepromo.controller;
 import com.codesigne.marjanepromo.DAO.AdminCenterDao;
 import com.codesigne.marjanepromo.DAO.AdminGeneralDao;
 import com.codesigne.marjanepromo.DAO.CenterDao;
+import com.codesigne.marjanepromo.DAO.PromotionDao;
 import com.codesigne.marjanepromo.model.AdminCenter;
 import com.codesigne.marjanepromo.model.Center;
+import com.codesigne.marjanepromo.model.Promotion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -20,11 +22,13 @@ public class GeneralServlet extends HttpServlet {
     private AdminGeneralDao adminGeneralDao;
     private AdminCenterDao adminCenterDao;
     private CenterDao centerDao;
+    private PromotionDao promotionDao;
 
     public void init() throws ServletException {
         adminGeneralDao = new AdminGeneralDao();
         adminCenterDao = new AdminCenterDao();
         centerDao = new CenterDao();
+        promotionDao = new PromotionDao();
     }
 
     @Override
@@ -38,6 +42,8 @@ public class GeneralServlet extends HttpServlet {
             request.setAttribute("admins", admins);
             List<Center> centers = centerDao.getAllCenter();
             request.setAttribute("centers", centers);
+            List<Promotion> promotions = promotionDao.getAllPromotions();
+            request.setAttribute("promotions", promotions);
             Cookie[] cookies = request.getCookies();
             String id = "0";
             for (Cookie cookie : cookies) {

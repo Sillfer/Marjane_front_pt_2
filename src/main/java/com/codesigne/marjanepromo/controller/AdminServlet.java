@@ -10,11 +10,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class AdminServlet extends HttpServlet {
@@ -49,6 +47,16 @@ public class AdminServlet extends HttpServlet {
             } else {
                 request.getRequestDispatcher("views/AdminCenter/CenterDashboard.jsp").forward(request, response);
             }
+        } else if (path.equals("/logout.center")) {
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id_center")) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
+            }
+
+            response.sendRedirect("landing.center");
         }
     }
 
@@ -70,15 +78,17 @@ public class AdminServlet extends HttpServlet {
                 response.sendRedirect("landing.center");
             }
         } else if (path.equals("/createPromotion.center")) {
-            Date dateStart = new Date();
-            Date dateEnd = new Date();
-            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
-            try {
-                dateStart = dateFormat.parse(request.getParameter("dateStart"));
-                dateEnd = dateFormat.parse(request.getParameter("dateEnd"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            Date dateStart = null;
+//            Date dateEnd = null;
+//            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
+//            try {
+//                dateStart = dateFormat.parse(request.getParameter("dateStart"));
+//                dateEnd = dateFormat.parse(request.getParameter("dateEnd"));
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+            LocalDate dateStart = LocalDate.parse(request.getParameter("dateStart"));
+            LocalDate dateEnd = LocalDate.parse(request.getParameter("dateEnd"));
             Long points = Long.parseLong(request.getParameter("points"));
             SubCategory subCategory = subCategoryDao.getCategoryById(Long.parseLong(request.getParameter("subCategory")));
             Cookie[] cookies = request.getCookies();

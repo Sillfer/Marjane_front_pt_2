@@ -5,6 +5,7 @@ import com.codesigne.marjanepromo.model.Promotion;
 
 
 import java.time.LocalTime;
+import java.util.List;
 
 public class PromotionDao extends AbstractHibernateDao<Promotion>{
 
@@ -13,7 +14,19 @@ public class PromotionDao extends AbstractHibernateDao<Promotion>{
         setClazz(Promotion.class);
     }
 
-    //get all promotion enter 8 and 12
+    public List getAllPromotions() {
+        return findAll();
+    }
+
+    public List getPromotionByCenterAdminId(int id) {
+       return jpaService.runInTransaction(entityManager -> {
+            return entityManager.createQuery("select p from Promotion p where p.adminCenter.id = :id", Promotion.class)
+                    .setParameter("id", id)
+                    .getResultList();
+        });
+    }
+
+    //get all promotion between 8 and 12
 
     public Promotion getPromotionByCategory(long idCat) {
         LocalTime currentTime = LocalTime.now();
@@ -56,7 +69,7 @@ public class PromotionDao extends AbstractHibernateDao<Promotion>{
         //========================change status
       Promotion promotion = new Promotion();
         PromotionDao p = new PromotionDao();
-        promotion = p.findOne(3L);
+        promotion = p.findOne(4L);
         String status = StatusEnum.ACCEPTED.toString();
         p.updateStatus(promotion,status);
 

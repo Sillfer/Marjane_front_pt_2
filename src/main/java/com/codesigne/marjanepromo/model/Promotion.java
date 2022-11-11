@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -21,9 +22,9 @@ public class Promotion implements Serializable {
 
     private String status;
 
-    private Date dateStart;
+    private LocalDate dateStart;
 
-    private Date dateEnd;
+    private LocalDate dateEnd;
 
     private Long points;
 
@@ -37,7 +38,7 @@ public class Promotion implements Serializable {
 
     //ToString function
     @Override
-    public String toString() {
+    public String toString()  {
         return "Promotion{" +
                 "id=" + id +
                 ", status=" + status +

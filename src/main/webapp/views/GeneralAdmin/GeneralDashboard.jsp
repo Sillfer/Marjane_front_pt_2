@@ -207,23 +207,39 @@
                             <th class="px-4 py-3">Start Date</th>
                             <th class="px-4 py-3">End Date</th>
                             <th class="px-4 py-3">Status</th>
+                            <th class="px-4 py-3">Points</th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y">
                         <tr class="bg-gray-50  hover:bg-gray-100  text-gray-700">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <div>
-                                        <p class="font-semibold">Food</p>
-                                        <p class="text-xs text-gray-600 ">Bread</p>
+                            <c:forEach items="${promotions}" var="promotion">
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center text-sm">
+                                        <div>
+                                            <p class="font-semibold">
+                                                    <%--                                            ${promotion.admincenter_id}--%>
+                                            </p>
+                                            <p class="text-xs text-gray-600 ">
+                                                    <%--                                            ${promotion.subcategory_id}--%>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">2022-11-01</td>
-                            <td class="px-4 py-3 text-sm">2022-11-05</td>
-                            <td class="px-4 py-3 text-xs">
-                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full"> Approved </span>
-                            </td>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                        <%--                                ${promotion.datestart}--%>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                        <%--                                ${promotion.dateend}--%>
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">
+                                        ${promotion.status}
+                                </span>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                        ${promotion.points}
+                                </td>
+                            </c:forEach>
                         </tr>
                         </tbody>
                     </table>
