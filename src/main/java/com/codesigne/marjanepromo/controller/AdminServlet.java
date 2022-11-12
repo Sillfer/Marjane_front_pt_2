@@ -1,8 +1,10 @@
 package com.codesigne.marjanepromo.controller;
 
 import com.codesigne.marjanepromo.DAO.AdminCenterDao;
+import com.codesigne.marjanepromo.DAO.MarketDao;
 import com.codesigne.marjanepromo.DAO.PromotionDao;
 import com.codesigne.marjanepromo.DAO.SubCategoryDao;
+import com.codesigne.marjanepromo.model.MarketManager;
 import com.codesigne.marjanepromo.model.Promotion;
 import com.codesigne.marjanepromo.model.SubCategory;
 import jakarta.servlet.ServletException;
@@ -20,11 +22,13 @@ public class AdminServlet extends HttpServlet {
     private AdminCenterDao adminCenterDao;
     private PromotionDao promotionDao;
     private SubCategoryDao subCategoryDao;
+    private MarketDao marketDao;
 
     public void init() throws ServletException {
         adminCenterDao = new AdminCenterDao();
         promotionDao = new PromotionDao();
         subCategoryDao = new SubCategoryDao();
+        marketDao = new MarketDao();
     }
 
     @Override
@@ -111,6 +115,37 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("errorMessage", errorMessage);
                 response.sendRedirect("Dashboard.center");
             }
+        } else if (path.equals("/createManager.center")) {
+            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            Cookie[] cookies = request.getCookies();
+            String id_center = "0";
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id_center")) {
+                    id_center = cookie.getValue();
+                }
+            }
+            MarketManager marketManager = new MarketManager();
+            marketManager.setFirstname(firstname);
+            marketManager.setLastname(lastname);
+            marketManager.setEmail(email);
+            marketManager.setPassword(password);
+            marketManager.setSubCategory(subCategoryDao.getCategoryById(Long.parseLong(request.getParameter("subCategory"))));
+            marketManager.setAdminCenter(adminCenterDao.getAdminById(Long.parseLong(id_center)));
+            try {
+                if (marketDao.createMarketManager(marketManager)) {
+                    response.sendRedirect("Dashboard.center");
+                } else {
+                    String errorMessage = "Invalid Form";
+                    request.setAttribute("errorMessage", errorMessage);
+                    response.sendRedirect("Dashboard.center");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 }
