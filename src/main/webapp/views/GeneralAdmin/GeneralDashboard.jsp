@@ -1,6 +1,25 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.codesigne.marjanepromo.model.Promotion" %>
+<%@ page import="com.codesigne.marjanepromo.model.SubCategory" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% List<Promotion> promotions = (List<Promotion>) request.getAttribute("promotions"); %>
+<% List<SubCategory> subCategories = (List<SubCategory>) request.getAttribute("subCategories"); %>
 
+<%--<c:forEach items="${promotions}" var="promotion">--%>
+<%--    <div class="col-md-4">--%>
+<%--        <div class="card">--%>
+<%--            <div class="card-header">--%>
+<%--                <h4 class="card-title">${promotion.getPromotionName()}</h4>--%>
+<%--            </div>--%>
+<%--            <div class="card-body">--%>
+<%--                <p class="card-text">${promotion.getPromotionDescription()}</p>--%>
+<%--            </div>--%>
+<%--            <div class="card-footer">--%>
+<%--                <a href="promotion.jsp?id=${promotion.getPromotionId()}" class="btn btn-primary">View</a>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 
 <jsp:include page="../inc/headers/headerAdminGeneral.jsp">
     <jsp:param name="navbar" value="navbar"/>
@@ -203,6 +222,7 @@
                     <table class="w-full  bg-neutral text-neutral-content">
                         <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                            <th class="px-4 py-3">Center Admin</th>
                             <th class="px-4 py-3">Category</th>
                             <th class="px-4 py-3">Start Date</th>
                             <th class="px-4 py-3">End Date</th>
@@ -212,32 +232,36 @@
                         </thead>
                         <tbody class="bg-white divide-y">
                         <tr class="bg-gray-50  hover:bg-gray-100  text-gray-700">
+
                             <c:forEach items="${promotions}" var="promotion">
                                 <td class="px-4 py-3">
                                     <div class="flex items-center text-sm">
                                         <div>
                                             <p class="font-semibold">
-                                                    <%--                                            ${promotion.admincenter_id}--%>
+                                                <c:out value="${promotion.getAdminCenter().firstname}"/>
                                             </p>
                                             <p class="text-xs text-gray-600 ">
-                                                    <%--                                            ${promotion.subcategory_id}--%>
+                                                <c:out value="${promotion.getAdminCenter().lastname}"/>
                                             </p>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-4 py-3 text-sm">
-                                        <%--                                ${promotion.datestart}--%>
+                                    <c:out value="${promotion.getSubCategory().name}"/>
                                 </td>
                                 <td class="px-4 py-3 text-sm">
-                                        <%--                                ${promotion.dateend}--%>
+                                    <c:out value="${promotion.getDateStart()}"/>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    <c:out value="${promotion.getDateEnd()}"/>
                                 </td>
                                 <td class="px-4 py-3 text-xs">
-                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">
-                                        ${promotion.status}
+                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 status rounded-full">
+                                    <c:out value="${promotion.getStatus()}"/>
                                 </span>
                                 </td>
                                 <td class="px-4 py-3 text-sm">
-                                        ${promotion.points}
+                                        ${promotion.getPoints()}
                                 </td>
                             </c:forEach>
                         </tr>
@@ -298,6 +322,18 @@
         </div>
     </div>
 </div>
+<script>
+    const status = document.querySelectorAll('.status');
+    status.forEach((status) => {
+        if (status.innerText === 'ACCEPTED') {
+            status.classList.add('bg-green-100', 'text-green-700')
+        } else if (status.innerText === 'PENDING') {
+            status.classList.add('bg-yellow-100', 'text-yellow-700')
+        } else if (status.innerText === 'REJECTED') {
+            status.classList.add('bg-red-100', 'text-red-700')
+        }
+    })
+</script>
 
 
 <jsp:include page="../inc/footer.jsp">

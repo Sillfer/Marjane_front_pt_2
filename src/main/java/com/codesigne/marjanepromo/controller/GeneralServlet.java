@@ -1,12 +1,10 @@
 package com.codesigne.marjanepromo.controller;
 
-import com.codesigne.marjanepromo.DAO.AdminCenterDao;
-import com.codesigne.marjanepromo.DAO.AdminGeneralDao;
-import com.codesigne.marjanepromo.DAO.CenterDao;
-import com.codesigne.marjanepromo.DAO.PromotionDao;
+import com.codesigne.marjanepromo.DAO.*;
 import com.codesigne.marjanepromo.model.AdminCenter;
 import com.codesigne.marjanepromo.model.Center;
 import com.codesigne.marjanepromo.model.Promotion;
+import com.codesigne.marjanepromo.model.SubCategory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
