@@ -55,16 +55,6 @@ public class PromotionDao extends AbstractHibernateDao<Promotion>{
     }
 
     public static void main(String[] args) {
-//        Promotion p = new Promotion();
-//        PromotionDao po = new PromotionDao();
-//        AdminCenterDao ad = new AdminCenterDao();
-//        SubCategoryDao sub = new SubCategoryDao();
-//        p.setAdminCenter(ad.getAdminById(2L));
-//        p.setSubCategory(sub.getCategoryById(1L));
-//
-//        p.setDate(Date.from(Instant.now()));
-//
-//        po.createPromotion(p);
 
         //========================change status
       Promotion promotion = new Promotion();

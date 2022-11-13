@@ -107,6 +107,8 @@ public class GeneralServlet extends HttpServlet {
             adminCenter.setEmail(email);
             adminCenter.setPassword(password);
             adminCenter.setCenter(centerDao.getCenterById(center_id));
+            Center center = centerDao.getCenterById(center_id);
+            center.setDispo(false);
             adminCenter.setAdminGeneral(adminGeneralDao.getAdminById(Long.parseLong(idgeneral)));
             if (adminCenterDao.createAdmin(adminCenter)) {
                 response.sendRedirect("Dashboard.general");

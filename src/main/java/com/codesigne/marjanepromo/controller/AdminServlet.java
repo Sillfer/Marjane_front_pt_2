@@ -59,7 +59,6 @@ public class AdminServlet extends HttpServlet {
                     response.addCookie(cookie);
                 }
             }
-
             response.sendRedirect("landing.center");
         }
     }

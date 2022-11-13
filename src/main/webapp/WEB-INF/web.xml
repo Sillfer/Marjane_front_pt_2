@@ -28,12 +28,4 @@
         <servlet-name>ManagerServlet</servlet-name>
         <url-pattern>*.manager</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>PromotionServlet</servlet-name>
-        <servlet-class>com.codesigne.marjanepromo.controller.PromotionServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>PromotionServlet</servlet-name>
-        <url-pattern>*.promotion</url-pattern>
-    </servlet-mapping>
 </web-app>

@@ -14,8 +14,8 @@ public class CenterDao extends AbstractHibernateDao<Center> {
     public static void main(String[] args) {
         Center c = new Center();
         c.setNom("Marjane");
-        c.setVille("Rabat");
-        AdminCenterDao ad = new AdminCenterDao();
+        c.setVille("Temara");
+//        AdminCenterDao ad = new AdminCenterDao();
 //        c.setAdminCenter(ad.getAdminById(5L));
         CenterDao ce = new CenterDao();
         ce.createCenter(c);
@@ -39,8 +39,10 @@ public class CenterDao extends AbstractHibernateDao<Center> {
     }
 
     public boolean createCenter(Center c) {
+        c.setDispo(true);
         return create(c);
     }
+
 
 
 }

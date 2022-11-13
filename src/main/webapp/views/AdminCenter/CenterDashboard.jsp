@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<jsp:include page="../inc/headers/headerAdminGeneral.jsp">
+<jsp:include page="../inc/headers/headerAdminCenter.jsp">
     <jsp:param name="navbar" value="navbar"/>
 </jsp:include>
 <title>General Dashboard</title>

@@ -89,7 +89,12 @@
                                     <select name="center_id" class="select select-bordered w-full max-w-xs">
                                         <option disabled selected>Select a Center</option>
                                         <c:forEach items="${centers}" var="center">
-                                            <option value="${center.id}">${center.nom} - ${center.ville}</option>
+                                            <c:choose>
+                                                <c:when test="${center.dispo}">
+                                                    <option value="${center.id}">${center.nom}
+                                                        - ${center.ville}</option>
+                                                </c:when>
+                                            </c:choose>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -231,9 +236,9 @@
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y">
-                        <tr class="bg-gray-50  hover:bg-gray-100  text-gray-700">
+                        <c:forEach items="${promotions}" var="promotion">
+                            <tr class="bg-gray-50  hover:bg-gray-100  text-gray-700">
 
-                            <c:forEach items="${promotions}" var="promotion">
                                 <td class="px-4 py-3">
                                     <div class="flex items-center text-sm">
                                         <div>
@@ -263,8 +268,8 @@
                                 <td class="px-4 py-3 text-sm">
                                         ${promotion.getPoints()}
                                 </td>
-                            </c:forEach>
-                        </tr>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
