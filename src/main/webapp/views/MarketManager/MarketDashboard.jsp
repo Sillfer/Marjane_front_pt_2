@@ -75,54 +75,6 @@
             </div>
         </div>
         <!-- ./Statistics Cards -->
-        <div class="grid col-start-2 col-span-4 p-4 gap-4">
-
-            <!-- Social Traffic -->
-            <div class="flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow-lg rounded">
-                <div class="rounded-t mb-0 px-0 border-0">
-                    <div class="flex flex-wrap items-center px-4 py-2">
-                        <div class="w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 ">Admins</h3>
-                        </div>
-                    </div>
-                    <div class="block w-full overflow-x-auto">
-                        <table class="items-center w-full bg-transparent border-collapse">
-                            <thead>
-                            <tr>
-                                <th class="px-4 bg-gray-100  text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    FIRST NAME
-                                </th>
-                                <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    LAST NAME
-                                </th>
-                                <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    EMAIL
-                                </th>
-                                <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <%--                            <c:forEach items="${admins}" var="admin">--%>
-                            <tr class="text-gray-700">
-                                <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                    <%--                                            ${admin.firstname}--%>
-                                </th>
-                                <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <%--                                            ${admin.lastname}--%>
-                                </td>
-                                <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <%--                                            ${admin.email}--%>
-                                </td>
-                            </tr>
-                            <%--                            </c:forEach>--%>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- ./Social Traffic -->
-        </div>
-        <!-- Client Table -->
         <div class="mt-4 mx-4">
 
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -135,28 +87,64 @@
                     <table class="w-full  bg-neutral text-neutral-content">
                         <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                            <th class="px-4 py-3">Category</th>
                             <th class="px-4 py-3">Start Date</th>
                             <th class="px-4 py-3">End Date</th>
                             <th class="px-4 py-3">Status</th>
+                            <th class="px-4 py-3">Points</th>
+                            <th class="px-4 py-3">Actions</th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y">
-                        <tr class="bg-gray-50  hover:bg-gray-100  text-gray-700">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <div>
-                                        <p class="font-semibold">Food</p>
-                                        <p class="text-xs text-gray-600 ">Bread</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">2022-11-01</td>
-                            <td class="px-4 py-3 text-sm">2022-11-05</td>
-                            <td class="px-4 py-3 text-xs">
-                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full"> Approved </span>
-                            </td>
-                        </tr>
+                        <c:choose>
+                            <c:when test="${empty promotions}">
+                                <tr>
+                                    <td colspan="4" class="text-center">No promotions found</td>
+                                </tr>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach items="${promotions}" var="promotion">
+                                    <tr class="bg-gray-50  hover:bg-gray-100  text-gray-700">
+                                        <td class="px-4 py-3 text-sm">
+                                            <c:out value="${promotion.getDateStart()}"/>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            <c:out value="${promotion.getDateEnd()}"/>
+                                        </td>
+                                        <td class="px-4 py-3 text-xs">
+                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 status rounded-full">
+                                    <c:out value="${promotion.getStatus()}"/>
+                                </span>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                                ${promotion.getPoints()}
+                                        </td>
+                                        <td>
+                                            <!-- The button to open modal -->
+                                            <label for="my-modal-3" class="btn">Accept</label>
+
+                                            <!-- Put this part before </body> tag -->
+                                            <input type="checkbox" id="my-modal-3" class="modal-toggle"/>
+                                            <div class="modal">
+                                                <div class="modal-box relative">
+                                                    <label for="my-modal-3"
+                                                           class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                                    <h3>Are you sure you want to accept this promotion?</h3>
+                                                    <form action="acceptPromotion.manager" method="post">
+                                                    <input type="hidden" name="id" value="${promotion.id}">
+                                                        <button type="submit"
+                                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                        >
+                                                            Accept
+                                                        </button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                         </tbody>
                     </table>
                 </div>
@@ -214,6 +202,19 @@
         </div>
     </div>
 </div>
+<script>
+    const status = document.querySelectorAll('.status');
+    status.forEach((status) => {
+        if (status.innerText === 'ACCEPTED') {
+            status.classList.add('bg-green-100', 'text-green-700')
+        } else if (status.innerText === 'PENDING') {
+            status.classList.add('bg-yellow-100', 'text-yellow-700')
+        } else if (status.innerText === 'REJECTED') {
+            status.classList.add('bg-red-100', 'text-red-700')
+        }
+    })
+
+</script>
 
 
 <jsp:include page="../inc/footer.jsp">

@@ -81,15 +81,6 @@ public class AdminServlet extends HttpServlet {
                 response.sendRedirect("landing.center");
             }
         } else if (path.equals("/createPromotion.center")) {
-//            Date dateStart = null;
-//            Date dateEnd = null;
-//            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
-//            try {
-//                dateStart = dateFormat.parse(request.getParameter("dateStart"));
-//                dateEnd = dateFormat.parse(request.getParameter("dateEnd"));
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
             LocalDate dateStart = LocalDate.parse(request.getParameter("dateStart"));
             LocalDate dateEnd = LocalDate.parse(request.getParameter("dateEnd"));
             Long points = Long.parseLong(request.getParameter("points"));

@@ -4,7 +4,8 @@ import com.codesigne.marjanepromo.DAO.AdminCenterDao;
 import com.codesigne.marjanepromo.DAO.MarketDao;
 import com.codesigne.marjanepromo.DAO.PromotionDao;
 import com.codesigne.marjanepromo.DAO.SubCategoryDao;
-import com.codesigne.marjanepromo.model.SubCategory;
+import com.codesigne.marjanepromo.helpers.StatusEnum;
+import com.codesigne.marjanepromo.model.Promotion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -37,15 +38,19 @@ public class ManagerServlet extends HttpServlet {
         if (path.equals("/landing.manager")) {
             request.getRequestDispatcher("views/MarketManager/ManagerLogin.jsp").forward(request, response);
         } else if (path.equals("/Dashboard.manager")) {
-            List<SubCategory> subCategories = subCategoryDao.getAllCategories();
-            request.setAttribute("subCategories", subCategories);
             Cookie[] cookies = request.getCookies();
             String id_manager = "0";
+            String subcategory_id = "0";
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("id_manager")) {
                     id_manager = cookie.getValue();
                 }
+                if (cookie.getName().equals("subcategory_id")) {
+                    subcategory_id = cookie.getValue();
+                }
             }
+            List<Promotion> promotions = promotionDao.getList(Long.valueOf(subcategory_id));
+            request.setAttribute("promotions", promotions);
             if (id_manager.equals("0")) {
                 response.sendRedirect("landing.manager");
             } else {
@@ -57,12 +62,14 @@ public class ManagerServlet extends HttpServlet {
                 if (cookie.getName().equals("id_manager")) {
                     cookie.setMaxAge(0);
                     response.addCookie(cookie);
+                }if (cookie.getName().equals("subcategory_id")) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
                 }
             }
             response.sendRedirect("landing.manager");
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,8 +79,11 @@ public class ManagerServlet extends HttpServlet {
             String password = request.getParameter("password");
             if (marketDao.validateMarketManagerLogin(email, password) != null) {
                 Cookie cookie = new Cookie("id_manager", String.valueOf(marketDao.validateMarketManagerLogin(email, password).getId()));
+                Cookie cookie1 = new Cookie("subcategory_id", String.valueOf(marketDao.validateMarketManagerLogin(email, password).getSubCategory().getId()));
                 cookie.setMaxAge(60 * 60);
+                cookie1.setMaxAge(60 * 60);
                 response.addCookie(cookie);
+                response.addCookie(cookie1);
                 request.setAttribute("id_manager", marketDao.validateMarketManagerLogin(email, password).getId());
                 response.sendRedirect("Dashboard.manager");
             } else {
@@ -81,6 +91,14 @@ public class ManagerServlet extends HttpServlet {
                 request.setAttribute("message", message);
                 response.sendRedirect("landing.manager");
             }
+        } else if (path.equals("/acceptPromotion.manager")) {
+            String id = String.valueOf(request.getParameter("id"));
+            String status = StatusEnum.ACCEPTED.toString();
+            Promotion promotion = new Promotion();
+            promotion.setId(Long.parseLong(id));
+            promotion.setStatus(status);
+            promotionDao.updateStatus(promotion, status);
+            response.sendRedirect("Dashboard.manager");
         }
     }
 }

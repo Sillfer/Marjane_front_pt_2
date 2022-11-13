@@ -6,21 +6,6 @@
 <% List<Promotion> promotions = (List<Promotion>) request.getAttribute("promotions"); %>
 <% List<SubCategory> subCategories = (List<SubCategory>) request.getAttribute("subCategories"); %>
 
-<%--<c:forEach items="${promotions}" var="promotion">--%>
-<%--    <div class="col-md-4">--%>
-<%--        <div class="card">--%>
-<%--            <div class="card-header">--%>
-<%--                <h4 class="card-title">${promotion.getPromotionName()}</h4>--%>
-<%--            </div>--%>
-<%--            <div class="card-body">--%>
-<%--                <p class="card-text">${promotion.getPromotionDescription()}</p>--%>
-<%--            </div>--%>
-<%--            <div class="card-footer">--%>
-<%--                <a href="promotion.jsp?id=${promotion.getPromotionId()}" class="btn btn-primary">View</a>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
 <jsp:include page="../inc/headers/headerAdminGeneral.jsp">
     <jsp:param name="navbar" value="navbar"/>
 </jsp:include>

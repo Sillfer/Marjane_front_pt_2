@@ -1,5 +1,6 @@
 package com.codesigne.marjanepromo.DAO;
 
+import com.codesigne.marjanepromo.helpers.StatusEnum;
 import com.codesigne.marjanepromo.model.Promotion;
 import org.junit.jupiter.api.Test;
 
@@ -29,5 +30,15 @@ class PromotionDaoTest {
         List<Promotion> promotions = p.getAllPromotions();
 //        System.out.println(promotions);
         assertNotNull(promotions);
+    }
+
+    @Test
+    void updateStatus() {
+        PromotionDao p = new PromotionDao();
+        Promotion promotion = new Promotion();
+        promotion = p.findOne(9L);
+        String status = StatusEnum.ACCEPTED.toString();
+        p.updateStatus(promotion, status);
+        assertNotNull(promotion);
     }
 }
