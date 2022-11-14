@@ -29,7 +29,7 @@ public class SubCategoryDao extends AbstractHibernateDao<SubCategory>{
     public static void main(String[] args) {
         SubCategory s = new SubCategory();
 
-        s.setName("Electronics");
+        s.setName("Bakery");
 
         SubCategoryDao sub = new SubCategoryDao();
 
