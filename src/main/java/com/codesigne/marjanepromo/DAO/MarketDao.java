@@ -43,7 +43,8 @@ public class MarketDao extends AbstractHibernateDao<MarketManager> {
     }
 
     public boolean createMarketManager(MarketManager marketManager) throws Exception {
-        String message = "Welcome to Marjane Promo, your account has been created successfully";
+        String message = "Welcome to Marjane Promo, your account has been created successfully/n" +
+                "your email is " + marketManager.getEmail() + " and your password is " + marketManager.getPassword();
         SendMail.sendMail(marketManager.getEmail(), message);
         marketManager.setPassword(hashPassword(marketManager.getPassword()));
         return create(marketManager);
