@@ -42,6 +42,13 @@ public class GeneralServlet extends HttpServlet {
             request.setAttribute("centers", centers);
             List<Promotion> promotions = promotionDao.getAllPromotions();
             request.setAttribute("promotions", promotions);
+            List<Promotion> accepted = promotionDao.getPromotionAccepted();
+            request.setAttribute("accepted", accepted);
+            List<Promotion> pending = promotionDao.getPromotionPending();
+            request.setAttribute("pending", pending);
+            List<Promotion> rejected = promotionDao.getPromotionRejected();
+            request.setAttribute("rejected", rejected);
+//            request.setAttribute("numberOfPromotions", promotionDao.getNumberOfPromotions());
             Cookie[] cookies = request.getCookies();
             String id = "0";
             for (Cookie cookie : cookies) {
