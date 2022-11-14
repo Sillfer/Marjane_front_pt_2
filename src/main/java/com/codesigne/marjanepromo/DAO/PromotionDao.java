@@ -75,6 +75,27 @@ public class PromotionDao extends AbstractHibernateDao<Promotion> {
         }
         return null;
     }
+    public List getPromotionAccepted() {
+        return jpaService.runInTransaction(entityManager -> {
+            return entityManager.createQuery("select p from Promotion p where p.status = :status", Promotion.class)
+                    .setParameter("status", StatusEnum.ACCEPTED.toString())
+                    .getResultList();
+        });
+    }
+    public List getPromotionPending() {
+        return jpaService.runInTransaction(entityManager -> {
+            return entityManager.createQuery("select p from Promotion p where p.status = :status", Promotion.class)
+                    .setParameter("status", StatusEnum.PENDING.toString())
+                    .getResultList();
+        });
+    }
+    public List getPromotionRejected() {
+        return jpaService.runInTransaction(entityManager -> {
+            return entityManager.createQuery("select p from Promotion p where p.status = :status", Promotion.class)
+                    .setParameter("status", StatusEnum.REJECTED.toString())
+                    .getResultList();
+        });
+    }
 
 
     public boolean createPromotion(Promotion p) {
