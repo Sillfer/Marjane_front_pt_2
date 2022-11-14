@@ -24,6 +24,8 @@ public class SubCategory implements Serializable {
     @OneToOne(mappedBy = "subCategory")
     private MarketManager marketManager;
 
+    private Boolean dispo;
+
     //ToString function
     @Override
     public String toString() {

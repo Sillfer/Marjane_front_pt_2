@@ -66,7 +66,7 @@ public class PromotionDao extends AbstractHibernateDao<Promotion> {
 
     public List getList(Long id) {
         LocalTime currentTime = LocalTime.now();
-        if (currentTime.isAfter(LocalTime.of(17, 0)) && currentTime.isBefore(LocalTime.of(23, 30))) {
+        if (currentTime.isAfter(LocalTime.of(8, 0)) && currentTime.isBefore(LocalTime.of(11, 30))) {
             return jpaService.runInTransaction(entityManager -> {
                 return entityManager.createQuery("select p from Promotion p where p.subCategory.id=:id", Promotion.class)
                         .setParameter("id", id)

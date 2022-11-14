@@ -95,7 +95,6 @@ public class ManagerServlet extends HttpServlet {
             String id = String.valueOf(request.getParameter("id"));
             String status = StatusEnum.ACCEPTED.toString();
             Promotion promotion = new Promotion();
-            promotion.setId(Long.parseLong(id));
             promotion.setStatus(status);
             promotionDao.updateStatus(promotion, status);
             response.sendRedirect("Dashboard.manager");

@@ -122,6 +122,10 @@ public class AdminServlet extends HttpServlet {
             marketManager.setLastname(lastname);
             marketManager.setEmail(email);
             marketManager.setPassword(password);
+            SubCategory subCategory = subCategoryDao.getCategoryById(Long.parseLong(request.getParameter("subCategory")));
+            subCategory.setDispo(false);
+            SubCategoryDao subCategoryDao = new SubCategoryDao();
+            subCategoryDao.update(subCategory);
             marketManager.setSubCategory(subCategoryDao.getCategoryById(Long.parseLong(request.getParameter("subCategory"))));
             marketManager.setAdminCenter(adminCenterDao.getAdminById(Long.parseLong(id_center)));
             try {

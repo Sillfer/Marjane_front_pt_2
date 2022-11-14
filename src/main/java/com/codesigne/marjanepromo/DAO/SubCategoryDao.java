@@ -22,6 +22,7 @@ public class SubCategoryDao extends AbstractHibernateDao<SubCategory>{
 
 
     public boolean createCategory(SubCategory cat){
+        cat.setDispo(true);
         return create(cat);
     }
 
@@ -29,10 +30,10 @@ public class SubCategoryDao extends AbstractHibernateDao<SubCategory>{
     public static void main(String[] args) {
         SubCategory s = new SubCategory();
 
-        s.setName("Bakery");
+        s.setName("Alimentation");
 
         SubCategoryDao sub = new SubCategoryDao();
 
-        sub.create(s);
+        sub.createCategory(s);
     }
 }

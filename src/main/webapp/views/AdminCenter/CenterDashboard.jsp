@@ -58,7 +58,11 @@
                                     <select name="subCategory" class="select select-bordered w-full max-w-xs">
                                         <option disabled selected>Select a Category</option>
                                         <c:forEach items="${subCategories}" var="subCategories">
-                                            <option value="${subCategories.id}">${subCategories.name}</option>
+                                            <c:choose>
+                                                <c:when test="${!subCategories.dispo}">
+                                                    <option value="${subCategories.id}">${subCategories.name}</option>
+                                                </c:when>
+                                            </c:choose>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -121,7 +125,11 @@
                                     <select name="subCategory" class="select select-bordered w-full max-w-xs">
                                         <option disabled selected>Select a Category</option>
                                         <c:forEach items="${subCategories}" var="subCategories">
-                                            <option value="${subCategories.id}">${subCategories.name}</option>
+                                            <c:choose>
+                                                <c:when test="${subCategories.dispo}">
+                                                    <option value="${subCategories.id}">${subCategories.name}</option>
+                                                </c:when>
+                                            </c:choose>
                                         </c:forEach>
                                     </select>
                                 </div>
