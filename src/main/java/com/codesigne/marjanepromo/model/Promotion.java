@@ -31,7 +31,7 @@ public class Promotion implements Serializable {
     @ManyToOne
     private AdminCenter adminCenter;
 
-    @OneToOne
+    @ManyToOne
     private SubCategory subCategory;
 
     //getters and setters

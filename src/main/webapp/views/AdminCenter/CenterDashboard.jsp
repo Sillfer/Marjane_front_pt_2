@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <jsp:include page="../inc/headers/headerAdminCenter.jsp">
@@ -29,9 +30,8 @@
                                         Start Date
                                     </label>
                                     <input name="dateStart"
-                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                            type="date" placeholder="Jane">
-                                    <p class="text-red-500 text-xs italic">Please fill out this field.</p>
                                 </div>
                                 <div class="w-full md:w-1/2 px-3">
                                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -88,7 +88,7 @@
                                         First Name
                                     </label>
                                     <input name="firstname"
-                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                           class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                            type="text" placeholder="First Name">
                                 </div>
                                 <div class="w-full md:w-1/2 px-3">
@@ -157,8 +157,9 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl text-white">1,257</p>
-                    <p>Visitors</p>
+
+                    <p class="text-2xl text-white">${fn:length(promotions)}</p>
+                    <p class="text-white">Promotions</p>
                 </div>
             </div>
             <div class="bg-blue-800  shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
@@ -170,8 +171,9 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl text-white">557</p>
-                    <p>Orders</p>
+<%--                    <p class="text-2xl text-white">${fn:length(accepted)}</p>--%>
+                    <p class="text-2xl text-white"><c:out value="${percentage}"/>%</p>
+                    <p class="text-white">Promotions Accepted</p>
                 </div>
             </div>
             <div class="bg-blue-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
@@ -183,8 +185,9 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl text-white">$11,257</p>
-                    <p>Sales</p>
+<%--                    <p class="text-2xl text-white">${fn:length(pending)}</p>--%>
+                    <p class="text-2xl text-white"><c:out value="${percentagePending}"/>%</p>
+                    <p class="text-white">Promotions Pending</p>
                 </div>
             </div>
             <div class="bg-blue-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
@@ -196,58 +199,16 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl text-white">$75,257</p>
-                    <p>Balances</p>
+<%--                    <p class="text-2xl text-white">${fn:length(rejected)}</p>--%>
+                    <p class="text-2xl text-white"><c:out value="${percentageRejected}"/>%</p>
+                    <p class="text-white">Promotions Rejected</p>
                 </div>
             </div>
         </div>
         <!-- ./Statistics Cards -->
         <div class="grid col-start-2 col-span-4 p-4 gap-4">
 
-            <!-- Social Traffic -->
-            <div class="flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow-lg rounded">
-                <div class="rounded-t mb-0 px-0 border-0">
-                    <div class="flex flex-wrap items-center px-4 py-2">
-                        <div class="w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 ">Admins</h3>
-                        </div>
-                    </div>
-                    <div class="block w-full overflow-x-auto">
-                        <table class="items-center w-full bg-transparent border-collapse">
-                            <thead>
-                            <tr>
-                                <th class="px-4 bg-gray-100  text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    FIRST NAME
-                                </th>
-                                <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    LAST NAME
-                                </th>
-                                <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    EMAIL
-                                </th>
-                                <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <%--                            <c:forEach items="${admins}" var="admin">--%>
-                            <tr class="text-gray-700">
-                                <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                    <%--                                            ${admin.firstname}--%>
-                                </th>
-                                <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <%--                                            ${admin.lastname}--%>
-                                </td>
-                                <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <%--                                            ${admin.email}--%>
-                                </td>
-                            </tr>
-                            <%--                            </c:forEach>--%>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- ./Social Traffic -->
+
         </div>
         <!-- Client Table -->
         <div class="mt-4 mx-4">
@@ -262,28 +223,49 @@
                     <table class="w-full  bg-neutral text-neutral-content">
                         <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                            <th class="px-4 py-3">Center Admin</th>
                             <th class="px-4 py-3">Category</th>
                             <th class="px-4 py-3">Start Date</th>
                             <th class="px-4 py-3">End Date</th>
                             <th class="px-4 py-3">Status</th>
+                            <th class="px-4 py-3">Points</th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y">
-                        <tr class="bg-gray-50  hover:bg-gray-100  text-gray-700">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <div>
-                                        <p class="font-semibold">Food</p>
-                                        <p class="text-xs text-gray-600 ">Bread</p>
+                        <c:forEach items="${promotions}" var="promotion">
+                            <tr class="bg-gray-50  hover:bg-gray-100  text-gray-700">
+
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center text-sm">
+                                        <div>
+                                            <p class="font-semibold">
+                                                <c:out value="${promotion.getAdminCenter().firstname}"/>
+                                            </p>
+                                            <p class="text-xs text-gray-600 ">
+                                                <c:out value="${promotion.getAdminCenter().lastname}"/>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">2022-11-01</td>
-                            <td class="px-4 py-3 text-sm">2022-11-05</td>
-                            <td class="px-4 py-3 text-xs">
-                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full"> Approved </span>
-                            </td>
-                        </tr>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    <c:out value="${promotion.getSubCategory().name}"/>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    <c:out value="${promotion.getDateStart()}"/>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    <c:out value="${promotion.getDateEnd()}"/>
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 status rounded-full">
+                                    <c:out value="${promotion.getStatus()}"/>
+                                </span>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                        ${promotion.getPoints()}
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -341,7 +323,18 @@
         </div>
     </div>
 </div>
-
+<script>
+    const status = document.querySelectorAll('.status');
+    status.forEach((status) => {
+        if (status.innerText === 'ACCEPTED') {
+            status.classList.add('bg-green-100', 'text-green-700')
+        } else if (status.innerText === 'PENDING') {
+            status.classList.add('bg-yellow-100', 'text-yellow-700')
+        } else if (status.innerText === 'REJECTED') {
+            status.classList.add('bg-red-100', 'text-red-700')
+        }
+    })
+</script>
 
 <jsp:include page="../inc/footer.jsp">
     <jsp:param name="footer" value="footer"/>

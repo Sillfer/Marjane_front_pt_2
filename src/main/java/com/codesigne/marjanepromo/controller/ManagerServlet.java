@@ -92,9 +92,9 @@ public class ManagerServlet extends HttpServlet {
                 response.sendRedirect("landing.manager");
             }
         } else if (path.equals("/acceptPromotion.manager")) {
-            String id = String.valueOf(request.getParameter("id"));
+            long id = Long.parseLong(request.getParameter("id"));
             String status = StatusEnum.ACCEPTED.toString();
-            Promotion promotion = new Promotion();
+            Promotion promotion = promotionDao.findOne(id);   // promotionDao.findOne(id) returns a Promotion object
             promotion.setStatus(status);
             promotionDao.updateStatus(promotion, status);
             response.sendRedirect("Dashboard.manager");

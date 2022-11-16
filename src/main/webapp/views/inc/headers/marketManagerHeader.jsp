@@ -27,11 +27,11 @@
     <a class="btn btn-ghost normal-case text-xl">Marjane</a>
   </div>
   <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal p-0">
-      <li><a href="">Dashboard</a></li>
-      <li><a href="">Promotions</a></li>
-      <li><a href="">Admins</a></li>
-    </ul>
+<%--    <ul class="menu menu-horizontal p-0">--%>
+<%--      <li><a href="">Dashboard</a></li>--%>
+<%--      <li><a href="">Promotions</a></li>--%>
+<%--      <li><a href="">Admins</a></li>--%>
+<%--    </ul>--%>
   </div>
   <div class="navbar-end">
     <a href="logout.manager" class="btn">Logout</a>

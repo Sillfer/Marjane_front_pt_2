@@ -119,27 +119,36 @@
                                                 ${promotion.getPoints()}
                                         </td>
                                         <td>
-                                            <!-- The button to open modal -->
-                                            <label for="my-modal-3" class="btn">Accept</label>
+                                            <c:choose>
+                                                <c:when test="${promotion.getStatus() == 'ACCEPTED'}">
 
-                                            <!-- Put this part before </body> tag -->
-                                            <input type="checkbox" id="my-modal-3" class="modal-toggle"/>
-                                            <div class="modal">
-                                                <div class="modal-box relative">
-                                                    <label for="my-modal-3"
-                                                           class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                                    <h3>Are you sure you want to accept this promotion?</h3>
-                                                    <form action="acceptPromotion.manager" method="post">
-                                                    <input type="hidden" name="id" value="${promotion.id}">
-                                                        <button type="submit"
-                                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                                        >
-                                                            Accept
-                                                        </button>
-                                                    </form>
+                                                </c:when>
+                                                <c:when test="${promotion.getStatus() == 'REJECTED'}">
+                                                    
+                                                </c:when>
+                                                <c:otherwise>
+                                                        <label for="my-modal-3" class="btn">Accept</label>
+                                                        <!-- Put this part before </body> tag -->
+                                                        <input type="checkbox" id="my-modal-3" class="modal-toggle"/>
+                                                        <div class="modal">
+                                                            <div class="modal-box relative">
+                                                                <label for="my-modal-3"
+                                                                       class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                                                <h3>Are you sure you want to accept this promotion?</h3>
+                                                                <form action="acceptPromotion.manager" method="post">
+                                                                    <input type="hidden" name="id"
+                                                                           value="${promotion.id}">
+                                                                    <button type="submit"
+                                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                                    >
+                                                                        Accept
+                                                                    </button>
+                                                                </form>
 
-                                                </div>
-                                            </div>
+                                                            </div>
+                                                        </div>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </td>
                                     </tr>
                                 </c:forEach>

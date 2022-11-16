@@ -79,14 +79,6 @@ public class AdminCenterDao extends AbstractHibernateDao<AdminCenter>{
         AdminCenterDao a = new AdminCenterDao();
         a.createAdmin(ad);
 
-        //===========================tester login
-
-//        ad = a.validateAdminLogin("laghrissi.reda01@gmail.com","12345");
-//        if(ad == null){
-//            System.out.println("Incorrect password or email !");
-//        }else{
-//            System.out.println("Welcome :"+ad.getFirstname()+" === >You are Connected");
-//        }
     }
 
 }

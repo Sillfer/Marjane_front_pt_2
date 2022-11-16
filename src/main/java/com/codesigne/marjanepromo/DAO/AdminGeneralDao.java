@@ -37,8 +37,6 @@ public class AdminGeneralDao extends AbstractHibernateDao<AdminGeneral>{
 
     // find one admin by email and password
     public AdminGeneral validateAdminLogin(String email,String password){
-//        String email = (String) login[0];
-//        String password = (String) login[1];
         AdminGeneral admin = getAdminByEmail(email);
         if (admin == null){
             return null;
@@ -73,13 +71,4 @@ public class AdminGeneralDao extends AbstractHibernateDao<AdminGeneral>{
         deleteById(id);
     }
 
-    public static void main(String[] args) {
-//        AdminGeneralDao adminGeneralDao = new AdminGeneralDao();
-//        AdminGeneral adminGeneral = new AdminGeneral();
-//        adminGeneral.setEmail("gliouinemahdi@gmail.com");
-//        adminGeneral.setFirstname("Mahdi");
-//        adminGeneral.setLastname("Gliouine");
-//        adminGeneral.setPassword("123456");
-//        adminGeneralDao.createAdmin(adminGeneral);
-    }
 }

@@ -13,25 +13,6 @@ public class PromotionDao extends AbstractHibernateDao<Promotion> {
         setClazz(Promotion.class);
     }
 
-    public static void main(String[] args) {
-
-        //========================change status
-        Promotion promotion = new Promotion();
-        PromotionDao p = new PromotionDao();
-        promotion = p.findOne(4L);
-        String status = StatusEnum.ACCEPTED.toString();
-        p.updateStatus(promotion, status);
-
-        //=============================afficher promo
-//        Promotion pp = new Promotion();
-//        SubCategoryDao sub = new SubCategoryDao();
-//        pp = p.getPromotionByCategory(1L);
-//            if(pp == null){
-//                System.out.println("there is no promotions");
-//            }else{
-//                System.out.println("Promotion Number ===> "+pp.getId()+ " ==> Status : "+pp.getStatus()+ " , Date ===>> "+ pp.getDate()+" ----\n SubCategory : "+pp.getSubCategory().getName());
-//            }
-    }
 
     public List getAllPromotions() {
         return findAll();
@@ -66,7 +47,7 @@ public class PromotionDao extends AbstractHibernateDao<Promotion> {
 
     public List getList(Long id) {
         LocalTime currentTime = LocalTime.now();
-        if (currentTime.isAfter(LocalTime.of(8, 0)) && currentTime.isBefore(LocalTime.of(11, 30))) {
+        if (currentTime.isAfter(LocalTime.of(8, 0)) && currentTime.isBefore(LocalTime.of(18, 30))) {
             return jpaService.runInTransaction(entityManager -> {
                 return entityManager.createQuery("select p from Promotion p where p.subCategory.id=:id", Promotion.class)
                         .setParameter("id", id)
@@ -82,6 +63,7 @@ public class PromotionDao extends AbstractHibernateDao<Promotion> {
                     .getResultList();
         });
     }
+//    get the percentage of the promotion accepted
     public List getPromotionPending() {
         return jpaService.runInTransaction(entityManager -> {
             return entityManager.createQuery("select p from Promotion p where p.status = :status", Promotion.class)

@@ -44,10 +44,16 @@ public class GeneralServlet extends HttpServlet {
             request.setAttribute("promotions", promotions);
             List<Promotion> accepted = promotionDao.getPromotionAccepted();
             request.setAttribute("accepted", accepted);
+            double percentage = (double) accepted.size() / promotions.size() * 100;
+            request.setAttribute("percentage", percentage);
             List<Promotion> pending = promotionDao.getPromotionPending();
             request.setAttribute("pending", pending);
+            double percentagePending = (double) pending.size() / promotions.size() * 100;
+            request.setAttribute("percentagePending", percentagePending);
             List<Promotion> rejected = promotionDao.getPromotionRejected();
             request.setAttribute("rejected", rejected);
+            double percentageRejected = (double) rejected.size() / promotions.size() * 100;
+            request.setAttribute("percentageRejected", percentageRejected);
 //            request.setAttribute("numberOfPromotions", promotionDao.getNumberOfPromotions());
             Cookie[] cookies = request.getCookies();
             String id = "0";

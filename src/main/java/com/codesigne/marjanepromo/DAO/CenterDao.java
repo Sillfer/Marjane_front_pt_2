@@ -11,15 +11,6 @@ public class CenterDao extends AbstractHibernateDao<Center> {
         setClazz(Center.class);
     }
 
-    public static void main(String[] args) {
-        Center c = new Center();
-        c.setNom("Marjane");
-        c.setVille("Temara");
-//        AdminCenterDao ad = new AdminCenterDao();
-//        c.setAdminCenter(ad.getAdminById(5L));
-        CenterDao ce = new CenterDao();
-        ce.createCenter(c);
-    }
 
     public List getAllCenter() {
         return findAll();
