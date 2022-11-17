@@ -44,14 +44,17 @@ public class AdminServlet extends HttpServlet {
             List<Promotion> accepted = promotionDao.getPromotionAccepted();
             request.setAttribute("accepted", accepted);
             double percentage = (double) accepted.size() / promotions.size() * 100;
+            percentage = Math.round(percentage * 100.0) / 100.0;
             request.setAttribute("percentage", percentage);
             List<Promotion> pending = promotionDao.getPromotionPending();
             request.setAttribute("pending", pending);
             double percentagePending = (double) pending.size() / promotions.size() * 100;
+            percentagePending = Math.round(percentagePending * 100.0) / 100.0;
             request.setAttribute("percentagePending", percentagePending);
             List<Promotion> rejected = promotionDao.getPromotionRejected();
             request.setAttribute("rejected", rejected);
             double percentageRejected = (double) rejected.size() / promotions.size() * 100;
+            percentageRejected = Math.round(percentageRejected * 100.0) / 100.0;
             request.setAttribute("percentageRejected", percentageRejected);
             Cookie[] cookies = request.getCookies();
             String id_center = "0";

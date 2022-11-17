@@ -6,6 +6,7 @@ import com.codesigne.marjanepromo.DAO.PromotionDao;
 import com.codesigne.marjanepromo.DAO.SubCategoryDao;
 import com.codesigne.marjanepromo.helpers.StatusEnum;
 import com.codesigne.marjanepromo.model.Promotion;
+import com.codesigne.marjanepromo.model.SubCategory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -51,6 +52,21 @@ public class ManagerServlet extends HttpServlet {
             }
             List<Promotion> promotions = promotionDao.getList(Long.valueOf(subcategory_id));
             request.setAttribute("promotions", promotions);
+            List<Promotion> accepted = promotionDao.getPromotionAcceptedBySubCategory(Long.parseLong(subcategory_id));
+            request.setAttribute("accepted", accepted);
+            double percentage = (double) accepted.size() / promotions.size() * 100;
+            percentage = Math.round(percentage * 100.0) / 100.0;
+            request.setAttribute("percentage", percentage);
+            List<Promotion> pending = promotionDao.getPromotionPendingBySubCategory(Long.parseLong(subcategory_id));
+            request.setAttribute("pending", pending);
+            double percentagePending = (double) pending.size() / promotions.size() * 100;
+            percentagePending = Math.round(percentagePending * 100.0) / 100.0;
+            request.setAttribute("percentagePending", percentagePending);
+            List<Promotion> rejected = promotionDao.getPromotionRejectedBySubCategory(Long.parseLong(subcategory_id));
+            request.setAttribute("rejected", rejected);
+            double percentageRejected = (double) rejected.size() / promotions.size() * 100;
+            percentageRejected = Math.round(percentageRejected * 100.0) / 100.0;
+            request.setAttribute("percentageRejected", percentageRejected);
             if (id_manager.equals("0")) {
                 response.sendRedirect("landing.manager");
             } else {

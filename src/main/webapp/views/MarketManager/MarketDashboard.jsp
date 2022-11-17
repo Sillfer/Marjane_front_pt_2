@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <jsp:include page="../inc/headers/marketManagerHeader.jsp">
@@ -30,8 +31,8 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl text-white">1,257</p>
-                    <p>Visitors</p>
+                    <p class="text-2xl text-white">${fn:length(promotions)}</p>
+                    <p class="text-white">Promotions</p>
                 </div>
             </div>
             <div class="bg-blue-800  shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
@@ -43,8 +44,8 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl text-white">557</p>
-                    <p>Orders</p>
+                    <p class="text-2xl text-white"><c:out value="${percentage}"/>%</p>
+                    <p class="text-white">Promotions Accepted</p>
                 </div>
             </div>
             <div class="bg-blue-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
@@ -56,8 +57,8 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl text-white">$11,257</p>
-                    <p>Sales</p>
+                    <p class="text-2xl text-white"><c:out value="${percentagePending}"/>%</p>
+                    <p class="text-white">Promotions Pending</p>
                 </div>
             </div>
             <div class="bg-blue-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
@@ -69,8 +70,8 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl text-white">$75,257</p>
-                    <p>Balances</p>
+                    <p class="text-2xl text-white"><c:out value="${percentageRejected}"/>%</p>
+                    <p class="text-white">Promotions Rejected</p>
                 </div>
             </div>
         </div>
@@ -84,6 +85,7 @@
                     </div>
                 </div>
                 <div class="w-full overflow-x-auto">
+
                     <table class="w-full  bg-neutral text-neutral-content">
                         <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
@@ -97,13 +99,21 @@
                         <tbody class="bg-white divide-y">
                         <c:choose>
                             <c:when test="${empty promotions}">
-                                <tr>
-                                    <td colspan="4" class="text-center">No promotions found</td>
-                                </tr>
+                                <div class="alert alert-error shadow-lg">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             class="stroke-current flex-shrink-0 h-6 w-6" fill="none"
+                                             viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span>Error! Come back between the hours of 08:00 and 12:00 to check for promotions.</span>
+                                    </div>
+                                </div>
                             </c:when>
                             <c:otherwise>
                                 <c:forEach items="${promotions}" var="promotion">
-                                    <tr class="bg-gray-50  hover:bg-gray-100  text-gray-700">
+                                    <tr class="bg-gray-50 hover:bg-gray-100 text-gray-700">
                                         <td class="px-4 py-3 text-sm">
                                             <c:out value="${promotion.getDateStart()}"/>
                                         </td>
@@ -121,32 +131,39 @@
                                         <td>
                                             <c:choose>
                                                 <c:when test="${promotion.getStatus() == 'ACCEPTED'}">
-
+                                                    <p class="px-4 py-3 text-sm">
+                                                        No actions available
+                                                    </p>
                                                 </c:when>
                                                 <c:when test="${promotion.getStatus() == 'REJECTED'}">
-                                                    
+                                                    <p class="px-4 py-3 text-sm">
+                                                        No actions available
+                                                    </p>
                                                 </c:when>
                                                 <c:otherwise>
-                                                        <label for="my-modal-3" class="btn">Accept</label>
-                                                        <!-- Put this part before </body> tag -->
-                                                        <input type="checkbox" id="my-modal-3" class="modal-toggle"/>
-                                                        <div class="modal">
-                                                            <div class="modal-box relative">
-                                                                <label for="my-modal-3"
-                                                                       class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                                                <h3>Are you sure you want to accept this promotion?</h3>
-                                                                <form action="acceptPromotion.manager" method="post">
+                                                    <label for="my-modal-3" class="btn btn-primary">Accept</label>
+                                                    <!-- Put this part before </body> tag -->
+                                                    <input type="checkbox" id="my-modal-3" class="modal-toggle"/>
+                                                    <div class="modal">
+                                                        <div class="modal-box relative">
+                                                            <label for="my-modal-3"
+                                                                   class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                                            <h3 class="font-bold text-lg pb-3">Do you want to accept
+                                                                this promotion</h3>
+                                                            <form action="acceptPromotion.manager" method="post">
+                                                                <div class="flex items-center justify-center">
                                                                     <input type="hidden" name="id"
                                                                            value="${promotion.id}">
                                                                     <button type="submit"
-                                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                                                    >
-                                                                        Accept
+                                                                            class="group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
+                                                                        <div class="absolute inset-0 w-3 bg-red-400 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+                                                                        <span class="relative text-black group-hover:text-white">Are You Sure ?</span>
                                                                     </button>
-                                                                </form>
+                                                                </div>
+                                                            </form>
 
-                                                            </div>
                                                         </div>
+                                                    </div>
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
@@ -174,6 +191,7 @@
                       </button>
                     </li>
                     <li>
+
                       <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">1</button>
                     </li>
                     <li>

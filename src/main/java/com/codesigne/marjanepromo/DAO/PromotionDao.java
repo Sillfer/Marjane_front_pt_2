@@ -47,7 +47,7 @@ public class PromotionDao extends AbstractHibernateDao<Promotion> {
 
     public List getList(Long id) {
         LocalTime currentTime = LocalTime.now();
-        if (currentTime.isAfter(LocalTime.of(8, 0)) && currentTime.isBefore(LocalTime.of(18, 30))) {
+        if (currentTime.isAfter(LocalTime.of(0, 0)) && currentTime.isBefore(LocalTime.of(23, 30))) {
             return jpaService.runInTransaction(entityManager -> {
                 return entityManager.createQuery("select p from Promotion p where p.subCategory.id=:id", Promotion.class)
                         .setParameter("id", id)
@@ -63,6 +63,14 @@ public class PromotionDao extends AbstractHibernateDao<Promotion> {
                     .getResultList();
         });
     }
+    public List getPromotionAcceptedBySubCategory(long id) {
+        return jpaService.runInTransaction(entityManager -> {
+            return entityManager.createQuery("select p from Promotion p where p.status = :status and p.subCategory.id = :id", Promotion.class)
+                    .setParameter("status", StatusEnum.ACCEPTED.toString())
+                    .setParameter("id", id)
+                    .getResultList();
+        });
+    }
 //    get the percentage of the promotion accepted
     public List getPromotionPending() {
         return jpaService.runInTransaction(entityManager -> {
@@ -71,10 +79,26 @@ public class PromotionDao extends AbstractHibernateDao<Promotion> {
                     .getResultList();
         });
     }
+    public List getPromotionPendingBySubCategory(long id) {
+        return jpaService.runInTransaction(entityManager -> {
+            return entityManager.createQuery("select p from Promotion p where p.status = :status and p.subCategory.id = :id", Promotion.class)
+                    .setParameter("status", StatusEnum.PENDING.toString())
+                    .setParameter("id", id)
+                    .getResultList();
+        });
+    }
     public List getPromotionRejected() {
         return jpaService.runInTransaction(entityManager -> {
             return entityManager.createQuery("select p from Promotion p where p.status = :status", Promotion.class)
                     .setParameter("status", StatusEnum.REJECTED.toString())
+                    .getResultList();
+        });
+    }
+    public List getPromotionRejectedBySubCategory(long id) {
+        return jpaService.runInTransaction(entityManager -> {
+            return entityManager.createQuery("select p from Promotion p where p.status = :status and p.subCategory.id = :id", Promotion.class)
+                    .setParameter("status", StatusEnum.REJECTED.toString())
+                    .setParameter("id", id)
                     .getResultList();
         });
     }
